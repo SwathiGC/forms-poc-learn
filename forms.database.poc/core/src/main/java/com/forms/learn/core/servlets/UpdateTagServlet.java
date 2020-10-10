@@ -85,7 +85,8 @@ public class UpdateTagServlet extends SlingSafeMethodsServlet {
 
 			resource.getResourceResolver().commit();
 			resourceResolver.close();
-
+			response.getWriter().print("response from servlet :) ");
+   
 		} catch (Exception e) {
 
 		} // make sure to close after all operations are done

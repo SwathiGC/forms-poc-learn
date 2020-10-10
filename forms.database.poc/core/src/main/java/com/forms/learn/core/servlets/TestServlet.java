@@ -1,5 +1,7 @@
 package com.forms.learn.core.servlets;
 
+import java.util.ArrayList;
+
 import javax.jcr.Node;
 import javax.jcr.Session;
 /*import javax.annotation.Resource;
@@ -8,14 +10,17 @@ import javax.servlet.Servlet;
 
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
+import org.apache.sling.api.resource.ModifiableValueMap;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.servlets.SlingSafeMethodsServlet;
 import org.apache.sling.models.annotations.injectorspecific.OSGiService;
+import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 import org.osgi.service.cm.ConfigurationAdmin;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.cm.Configuration;
-
+import com.day.cq.dam.api.*;
+import com.day.cq.tagging.TagManager;
 import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.api.PageManager;
 
@@ -26,23 +31,31 @@ public class TestServlet extends SlingSafeMethodsServlet {
 	protected void doGet(final SlingHttpServletRequest request, final SlingHttpServletResponse response) {
 		try {
 
-			ResourceResolver resourceResolver = request.getResourceResolver();
-			Resource resource = resourceResolver.getResource("/content/dam/adobe-logo.jpg/jcr:content");
-
-			Session session = resourceResolver.adaptTo(Session.class);
-
-			Node node = resource.adaptTo(Node.class);
-			
-			node.setProperty("jcr:title", "From property");
-			node.setProperty("cq:tags", "custom-fruits");
 			/*
-			 * response.getWriter().println("This is test servlet :)");
-			 * 
-			 * response.getWriter().println(node.getProperty("jcr:title"));
-			 * response.getWriter().println(node.getProperty("cq:tags"));
-			 */
-			response.getWriter().println("Response from Servlet");
+			 * need to check that /jcr:content has to be given or not.
+			 * */
+			ResourceResolver resourceResolver = request.getResourceResolver();
 
+			Resource resource = resourceResolver.getResource("/content/forms-data-poc/us/en");
+			response.getWriter().println("After resource :)");
+
+			/*
+			 * ModifiableValueMap properties = resource.adaptTo(ModifiableValueMap.class);
+			 * properties.put("jcr:description", "Setting the description from Java.");
+			 * properties.put("jcr:title", request.getParameter("tagName"));
+			 */
+			com.forms.learn.core.models.ChildTitlesModel childObj=resource.adaptTo(com.forms.learn.core.models.ChildTitlesModel.class);
+			ArrayList<String> childTitles=childObj.getListOfChild();
+			
+			 response.getWriter().println("Before loop "+childTitles.size());
+			 
+			for(int i=0;i<childTitles.size();i++) {
+				response.getWriter().println(i+" "+childTitles.get(i));
+			}
+			
+			
+			
+			response.getWriter().println("Response from servlet :) ");
 			resource.getResourceResolver().commit();
 			resourceResolver.close();
 

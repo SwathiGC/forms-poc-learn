@@ -32,6 +32,8 @@ import org.apache.sling.settings.SlingSettingsService;
 import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.api.PageManager;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Optional;
 
 @Model(adaptables = Resource.class)
@@ -49,7 +51,7 @@ public class HelloWorldModel {
     private ResourceResolver resourceResolver;
 
     private String message;
-
+    ArrayList childTitle=new ArrayList();
     @PostConstruct
     protected void init() {
         PageManager pageManager = resourceResolver.adaptTo(PageManager.class);
@@ -61,10 +63,25 @@ public class HelloWorldModel {
             + "Resource type is: " + resourceType + "\n"
             + "Current page is:  " + currentPagePath + "\n"
             + "This is instance: " + settings.getSlingId() + "\n";
+        
+        
+        Iterator<Resource> resource=currentResource.listChildren();
+        while(resource.hasNext()) {
+        	Page page=resource.next().adaptTo(Page.class);
+        	String currentChildTitle=page.getTitle();
+        	childTitle.add(currentChildTitle);
+        }
+        
+        
+        
     }
 
     public String getMessage() {
         return message;
+    }
+    
+    public ArrayList getChildTitle() {
+    	return childTitle;
     }
 
 }
