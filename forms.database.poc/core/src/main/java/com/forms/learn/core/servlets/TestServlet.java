@@ -1,6 +1,7 @@
 package com.forms.learn.core.servlets;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.jcr.Node;
 import javax.jcr.Session;
@@ -45,7 +46,7 @@ public class TestServlet extends SlingSafeMethodsServlet {
 			 * properties.put("jcr:title", request.getParameter("tagName"));
 			 */
 			com.forms.learn.core.models.ChildTitlesModel childObj=resource.adaptTo(com.forms.learn.core.models.ChildTitlesModel.class);
-			ArrayList<String> childTitles=childObj.getListOfChild();
+			List<String> childTitles=childObj.getListOfChild();
 			
 			 response.getWriter().println("Before loop "+childTitles.size());
 			 

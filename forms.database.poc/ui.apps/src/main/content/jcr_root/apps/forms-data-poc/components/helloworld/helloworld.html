@@ -12,30 +12,20 @@
     </div>
 </div>
 
-<!--/*
-<sly data-sly-use.pageListing="com.forms.learn.core.models.ChildTitlesModel" />
-<sly data-sly-list.keyname="${pageListing.listOfChild}">
-			${keyname}
-  </sly>
 
-  <dl data-sly-list="${currentPage.listChildren}">
-    <dt>index: ${itemList.index}</dt>
-    <dt>value: ${item.title}</dt>
-</dl>
-*/-->
+<sly data-sly-use.pageListing="com.forms.learn.core.models.ChildTitlesModel">
+    aaa
 
+    ${pageListing.val}
+    <sly data-sly-list.keyname="${pageListing.listOfChild}">
+        Keyname:${keyname}
+    </sly>
+</sly>
 
-
-hello1
-
-
-<sly data-sly-use.pageListings="com.forms.learn.core.models.HelloWorldModel" />
-<div data-sly-list.valll="${pageListings.childTitle}"
-	<p>List :${valll}</p>
-
-</div>
-
-
+<!--<dl data-sly-list="${currentPage.listChildren}">
+  <dt>index: ${itemList.index}</dt>
+  <dt>value: ${item.title}</dt>
+</dl>-->
 hello
 
 
