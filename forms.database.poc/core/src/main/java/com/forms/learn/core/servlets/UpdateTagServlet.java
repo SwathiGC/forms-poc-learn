@@ -49,7 +49,7 @@ public class UpdateTagServlet extends SlingSafeMethodsServlet {
 
 			TagManager tag_manager = resourceResolver.adaptTo(TagManager.class);
 			String tag_object = "/content/cq:tags/" + nameSpaceName + "/" + req.getParameter("tagName");
-			response.getWriter().print("Tag_Object" + tag_object);
+			response.getWriter().println("Tag_Object " + tag_object);
 			Tag resolveId = tag_manager.resolve(tag_object);
 
 			int i = 0;
@@ -78,14 +78,14 @@ public class UpdateTagServlet extends SlingSafeMethodsServlet {
 			boolean autoSave = true;
 
 			PageManager pageManager = resourceResolver.adaptTo(PageManager.class);
-			pageManager.create("/content/forms-data-poc/language-masters/en", "my-new-page", templatePath,
+			pageManager.create("/content/forms-data-poc/language-masters/en", "page-from-java", templatePath,
 					"My New Page Title", autoSave);
 
 			// if (!autoSave) { resourceResolver.commit(); }
 
 			resource.getResourceResolver().commit();
 			resourceResolver.close();
-			response.getWriter().print("response from servlet :) ");
+			response.getWriter().println("response from servlet :) ");
    
 		} catch (Exception e) {
 

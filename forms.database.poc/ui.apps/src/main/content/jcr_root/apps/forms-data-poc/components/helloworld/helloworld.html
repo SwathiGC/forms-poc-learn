@@ -1,4 +1,5 @@
 
+<h1>Hello</h1>
 
 <div class="cmp-helloworld" data-cmp-is="helloworld">
     <h2 class="cmp-helloworld__title">Hello World Component</h2>
@@ -12,20 +13,31 @@
     </div>
 </div>
 
-
-<sly data-sly-use.pageListing="com.forms.learn.core.models.ChildTitlesModel">
+<sly data-sly-use.pageList="com.forms.learn.core.models.ChildTitlesModel">
     aaa
 
-    ${pageListing.val}
-    <sly data-sly-list.keyname="${pageListing.listOfChild}">
-        Keyname:${keyname}
+    ${pageList.val}
+    <sly data-sly-list.child="${pageList.listOfChild}">
+       <li>Hellloooooooo</li>
+       <li>${child.title}</li>
+       <li>${child.description}</li>
+       <br/>
     </sly>
 </sly>
 
-<!--<dl data-sly-list="${currentPage.listChildren}">
+
+ <br/>
+<!-- /*<dl data-sly-list="${currentPage.listChildren}">
   <dt>index: ${itemList.index}</dt>
   <dt>value: ${item.title}</dt>
-</dl>-->
-hello
+</dl>
+hello */-->
 
-
+<sly data-sly-use.pL="com.forms.learn.core.models.PageListingModel" />
+${pL.val}
+<ul data-sly-list.iterChild="${pL.datafromModelList}">
+<li>${iterChild.title}</li>
+<li>${iterChild.description}</li>
+<br/>
+</ul>
+changing txt...

@@ -65,16 +65,32 @@ public class HelloWorldModel {
             + "This is instance: " + settings.getSlingId() + "\n";
         
         
-        Iterator<Resource> resource=currentResource.listChildren();
-        while(resource.hasNext()) {
-        	Page page=resource.next().adaptTo(Page.class);
-        	String currentChildTitle=page.getTitle();
-        	childTitle.add(currentChildTitle);
-        }
+        Resource ress=resourceResolver.getResource(currentPagePath);
+        if(null!=ress) 
+        {
+     	   if(ress.hasChildren())
+     	   {
+     		   Page parentPage = ress.adaptTo(Page.class);
+ 				if(parentPage!=null)
+ 				{
+ 					Iterator<Page> listChildPages = parentPage.listChildren();
+ 					while (listChildPages.hasNext()) {
+ 						Page childPage = listChildPages.next();
+// 						ListPageDetail detail = new ListPageDetail();
+// 						detail.setTitle(childPage.getTitle());
+// 						detail.setDescription(childPage.getDescription());
+ 						childTitle.add(childPage.getTitle());
+ 					}
+ 				}
+ 			}			
+     	 }else
+     		  childTitle.add("Inside else");
+     }
         
         
         
-    }
+        
+   
 
     public String getMessage() {
         return message;
