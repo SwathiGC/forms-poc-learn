@@ -1,6 +1,21 @@
 
-<h1>Hello</h1>
+<h1>${currentPage.properties.jcr:title}</h1>
+Identifiers:
+<div data-sly-test.isEditMode="${wcmmode.edit}">${isEditMode}</div>
+<div data-sly-list.test="${currentPage.listChildren}">
 
+	Title: ${test.properties.jcr:title} ,
+	&nbsp Description : ${test.properties.jcr:description}, 
+    &nbsp Template : ${test.properties.cq:template}
+	<br/>
+</div>
+
+
+<!--/* The attribute statement uses the identifier to know to which attribute it should apply it's value: */-->
+<div data-sly-attribute.title="${properties.jcr:title}"></div> <!--/* This will create a title attribute */-->
+
+-------------------------------------
+<!-- /* 
 <div class="cmp-helloworld" data-cmp-is="helloworld">
     <h2 class="cmp-helloworld__title">Hello World Component</h2>
     <div class="cmp-helloworld__item" data-sly-test="${properties.text}">
@@ -10,29 +25,41 @@
     <div class="cmp-helloworld__item" data-sly-use.model="com.forms.learn.core.models.HelloWorldModel" data-sly-test="${model.message}">
         <p class="cmp-helloworld__item-label">Model message:</p>
         <pre class="cmp-helloworld__item-output"data-cmp-hook-helloworld="model">${model.message}</pre>
-    </div>
+
+        <sly data-sly-list.pagesListss="${model.childTitle}">
+			Pages : ${pagesListss}
+            <br/>
+        </sly>
+
+	</div>
 </div>
 
-<sly data-sly-use.pageList="com.forms.learn.core.models.ChildTitlesModel">
-    aaa
 
-    ${pageList.val}
+
+
+<sly data-sly-use.pageList="com.forms.learn.core.models.ChildTitlesModel"/>
+    aaa
+	${pageList.val}
+
     <sly data-sly-list.child="${pageList.listOfChild}">
-       <li>Hellloooooooo</li>
-       <li>${child.title}</li>
+		<li>${child.title}</li>
        <li>${child.description}</li>
        <br/>
-    </sly>
-</sly>
+</sly>*/-->
+
+
 
 
  <br/>
-<!-- /*<dl data-sly-list="${currentPage.listChildren}">
+<!-- /* 
+<dl data-sly-list="${currentPage.listChildren}">
   <dt>index: ${itemList.index}</dt>
   <dt>value: ${item.title}</dt>
 </dl>
-hello */-->
+hello 
+*/-->
 
+<!-- /* */ -->
 <sly data-sly-use.pL="com.forms.learn.core.models.PageListingModel" />
 ${pL.val}
 <ul data-sly-list.iterChild="${pL.datafromModelList}">
@@ -40,4 +67,5 @@ ${pL.val}
 <li>${iterChild.description}</li>
 <br/>
 </ul>
-changing txt...
+changing txt... 
+
